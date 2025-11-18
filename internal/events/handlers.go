@@ -2,10 +2,23 @@ package events
 
 import "log"
 
-// HandleStasisStart обработчик события StasisStart
 func HandleStasisStart(evt map[string]interface{}) {
-    log.Printf("[events] StasisStart: %v", evt)
+    channel := evt["channel"].(map[string]interface{})
+    
+    channelName := channel["name"].(string)
+    
+    caller := channel["caller"].(map[string]interface{})
+    callerNum := caller["number"].(string)
+    
+    dialplan := channel["dialplan"].(map[string]interface{})
+    calleeNum := dialplan["exten"].(string)
+    
+    log.Printf("📞 НОВЫЙ ЗВОНОК: %s (%s) -> %s", 
+        callerNum, channelName, calleeNum)
+    
+    // Сохранить в БД
 }
+
 
 // HandleChannelStateChange обработчик смены состояния канала
 func HandleChannelStateChange(evt map[string]interface{}) {

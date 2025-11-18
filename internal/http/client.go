@@ -1,4 +1,4 @@
-package apiclient
+package http
 
 import (
 	"net/http"
